@@ -7,6 +7,8 @@ const App = () => {
   const [inputValue, setInputValue] = useState("");
   const [indexNum, setIndexNum] = useState(null);
   const [Data, setData] = useState([]);
+  const [checkedItems, setCheckedItems] = useState([]);
+  console.log('checkedItems: ', checkedItems);
 
   const heandelSubmit = (event) => {
     event.preventDefault();
@@ -39,6 +41,15 @@ const App = () => {
     setIndexNum(index);
   };
 
+  const checkItem = (index) => {
+    setCheckedItems((prevCheckedItems) => {
+      const newCheckedItems = [...prevCheckedItems];
+      console.log('newCheckedItems: ', newCheckedItems);
+      newCheckedItems[index] = !newCheckedItems[index];
+      return newCheckedItems;
+    });
+  };
+
   return (
     <>
       <div className="title">
@@ -56,9 +67,20 @@ const App = () => {
         {Data?.length > 0 ? (
           <ul className="task-list">
             {Data.map((item, index) => (
-              <li key={index} className="task-list-item">
+              <li
+                key={index}
+                className={`task-list-item ${
+                  checkedItems[index] ? "done-task-list-item" : ""
+                } `}
+              >
                 {item}
                 <div>
+                  <input
+                    type="checkbox"
+                    onChange={() => checkItem(index)}
+                    checked={checkedItems[index] || false}
+                    name={`checkbox${index}`}
+                  />
                   <span onClick={() => deleteItem(index)}>
                     <img src={deleticon} alt="delete icon" />
                   </span>

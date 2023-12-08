@@ -81,6 +81,9 @@ button {
   padding: 8px;
   justify-content: space-between;
 }
+.done-task-list-item{
+  background-color: green;
+}
 .task-list-item img {
   width: 25px;
   cursor: pointer;
