@@ -32,6 +32,10 @@ const App = () => {
       return Currentindex !== index;
     });
     setData(deleteData);
+    setIndexNum(null);
+    setInputValue("");
+
+
   };
   const editItem = (index) => {
     const editData = Data?.filter((item, Currentindex) => {
@@ -61,7 +65,7 @@ const App = () => {
         <form onSubmit={heandelSubmit}>
           <input type="text" onChange={getText} value={inputValue} />
           <button disabled={inputValue?.length > 0 ? false : true}>
-            submit
+            {typeof indexNum === "number" && indexNum >= 0 ?"update":"submit"}
           </button>
         </form>
         {Data?.length > 0 ? (
